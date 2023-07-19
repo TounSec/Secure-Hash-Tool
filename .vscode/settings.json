@@ -11,6 +11,10 @@
         ".\\Secure-Hash-Tool\\Cargo.toml",
         ".\\Secure-Hash-Tool\\Cargo.toml",
         ".\\Secure-Hash-Tool\\Cargo.toml",
+        ".\\Secure-Hash-Tool\\Cargo.toml",
+        ".\\Secure-Hash-Tool\\Cargo.toml",
+        ".\\Secure-Hash-Tool\\Cargo.toml",
         ".\\Secure-Hash-Tool\\Cargo.toml"
-    ]
+    ],
+    "rust-analyzer.showUnlinkedFileNotification": false
 }

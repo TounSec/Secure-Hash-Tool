@@ -13,14 +13,24 @@ pub struct Opt {
         long = "algorithm",
         default_value = "sha256",
         help = "Choose the hash algorithm (
+            md2,
+            md4,
+            md5,
+            md6,
+            sha1,
+            sha224,
             sha256,
-            sha512
+            sha384,
+            sha512,
+            sha512_224,
+            sha512_256
         )",
         )]
     pub algorithm: Algorithm,
 
     #[structopt(name = "TEXT", help = "The text to hash")]
     pub text: String,
+
 }
 
 impl Opt {
