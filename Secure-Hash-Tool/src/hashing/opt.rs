@@ -31,11 +31,19 @@ impl Opt {
 
     pub fn version() -> &'static str
     {
-        "1.0.0v"
+        "v1.0.0"
     }
 
     pub fn about() -> &'static str
     {
-        "🦀🔢 Rust tool for hashing text using multiple algorithms 🔢🦀"
+        "
+          _        _        _        _        _        _        _        _        _        _    
+        _( )__   _( )__   _( )__   _( )__   _( )__   _( )__   _( )__   _( )__   _( )__   _( )__ 
+      _|     _|_|     _|_|     _|_|     _|_|     _|_|     _|_|     _|_|     _|_|     _|_|     _|
+     (_ S _ (_(_ E _ (_(_ C _ (_(_ U _ (_(_ R _ (_(_ E _ (_(_ H _ (_(_ A _ (_(_ S _ (_(_ H _ (_ 
+       |_( )__| |_( )__| |_( )__| |_( )__| |_( )__| |_( )__| |_( )__| |_( )__| |_( )__| |_( )__|
+
+        🦀🔢 Rust tool for hashing text using multiple algorithms 🔢🦀
+        "
     }
 }
