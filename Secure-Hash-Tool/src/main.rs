@@ -1,24 +1,21 @@
-use crypto_hash::{Algorithm, hex_digest};
-use std::io::{self, Write};
+#![allow(non_snake_case)]
+mod Hashing;
 
-fn readInput() -> String
-{
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).expect("Error reading input.");
-    input.trim().to_string()
-}
+use Hashing::Algorithm;
+use Hashing::calculate_hash;
+use Hashing::Opt;
+use structopt::StructOpt;
 
 fn main()
 {
-    println!("Enter the text to hash : ");
-    let input = readInput();
+    let opt = Opt::from_args();
 
-    // Choose the hash algorithm (e.g SHA256)
-    let algorithm = Algorithm::SHA256;
+    if opt.algorithm == Algorithm::Help {
+        Opt::clap().print_help().unwrap();
+        return;
+    }
 
-    // Calculate the next hash
-    let hash = hex_digest(algorithm, input.as_bytes());
+    let hash = calculate_hash(&opt.algorithm, opt.text.as_bytes());
 
-    // Display the result
-    println!("Hash : {}", hash);
+    println!("The {:?} Hash is : {}", opt.algorithm, hash);
 }

@@ -1,0 +1,16 @@
+{
+    "rust-analyzer.linkedProjects": [
+        ".\\Secure-Hash-Tool\\Cargo.toml",
+        ".\\Secure-Hash-Tool\\Cargo.toml",
+        ".\\Secure-Hash-Tool\\Cargo.toml",
+        ".\\Secure-Hash-Tool\\Cargo.toml",
+        ".\\Secure-Hash-Tool\\Cargo.toml",
+        ".\\Secure-Hash-Tool\\Cargo.toml",
+        ".\\Secure-Hash-Tool\\Cargo.toml",
+        ".\\Secure-Hash-Tool\\Cargo.toml",
+        ".\\Secure-Hash-Tool\\Cargo.toml",
+        ".\\Secure-Hash-Tool\\Cargo.toml",
+        ".\\Secure-Hash-Tool\\Cargo.toml",
+        ".\\Secure-Hash-Tool\\Cargo.toml"
+    ]
+}
