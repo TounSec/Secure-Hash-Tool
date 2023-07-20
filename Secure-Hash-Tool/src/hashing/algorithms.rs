@@ -23,6 +23,8 @@ pub enum Algorithm {
     Sha512_224,
     #[structopt(name = "sha512_256")]
     Sha512_256,
+    #[structopt(name = "bcrypt")]
+    Bcrypt,
     #[structopt(name = "help")]
     Help,
 }
@@ -42,6 +44,7 @@ impl FromStr for Algorithm {
             "sha512"        =>      Ok(Algorithm::Sha512),
             "sha512_224"    =>      Ok(Algorithm::Sha512_224),
             "sha512_256"    =>      Ok(Algorithm::Sha512_256),
+            "bcrypt"        =>      Ok(Algorithm::Bcrypt),
             "help"          =>      Ok(Algorithm::Help),
             _               =>      Err("Invalid algorithm.".to_string()),
         }

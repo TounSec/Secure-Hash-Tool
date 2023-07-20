@@ -3,6 +3,7 @@ use md4::Md4;
 use md5;
 use sha1::Sha1;
 use sha2::{Sha256, Sha512, Sha512_224, Sha512_256, Sha224, Sha384, Digest};
+use bcrypt::{DEFAULT_COST, hash};
 use crate::Hashing::algorithms::Algorithm;
 
 pub fn calculate_hash(algorithm: &Algorithm, data: &[u8]) -> String
@@ -65,6 +66,16 @@ pub fn calculate_hash(algorithm: &Algorithm, data: &[u8]) -> String
             hasher.update(data);
             let result = hasher.finalize();
             format!("{:x}", result)
+        },
+        Algorithm::Bcrypt       =>     {
+            let hasher = match hash(data, DEFAULT_COST) {
+                Ok(h)       =>      h,
+                Err(_)              =>      {
+                    eprintln!("error.");
+                    return String::new();
+                }
+            };
+            hasher
         },
         Algorithm::Help     =>      {
             eprintln!("The --help option is used to display the program's help");

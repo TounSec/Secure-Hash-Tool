@@ -51,7 +51,9 @@ cd Secure-Hash-Tool/target/debug
                                                sha384,
                                                sha512,
                                                sha512_224,
-                                               sha512_256
+                                               sha512_256,
+                                               bcrypt [cost: 12]
+                                               
                                             ) [default: sha256]
 
     ARGS:
