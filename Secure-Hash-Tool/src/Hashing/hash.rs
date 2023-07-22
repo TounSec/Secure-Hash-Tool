@@ -3,10 +3,10 @@ use md4::Md4;
 use md5;
 use sha1::Sha1;
 use sha2::{Sha256, Sha512, Sha512_224, Sha512_256, Sha224, Sha384, Digest};
-use bcrypt::{DEFAULT_COST, hash};
+use bcrypt::{DEFAULT_COST, hash, hash_with_salt};
 use crate::Hashing::algorithms::Algorithm;
 
-pub fn calculate_hash(algorithm: &Algorithm, data: &[u8]) -> String
+pub fn calculate_hash(algorithm: &Algorithm, data: &[u8], salt: Option<&str>) -> String
 {
     match algorithm {
         Algorithm::Md2       =>     {
@@ -22,8 +22,15 @@ pub fn calculate_hash(algorithm: &Algorithm, data: &[u8]) -> String
             format!("{:x}", result)
         },
         Algorithm::Md5       =>     {
-            let hasher = md5::compute(data);
-            format!("{:x}", hasher)
+            if Some(s) == salt {
+                let salted_hash = format!("{}{}", s, String::from_utf8_lossy(data));
+                let hasher = md5::compute(salted_hash.as_bytes());
+                format!("{:x}", hasher)
+
+            } else {
+                let hasher = md5::compute(data);
+                format!("{:x}", hasher)
+            }
         },
         Algorithm::Sha1    =>     {
             let mut hasher = Sha1::new();
@@ -68,11 +75,21 @@ pub fn calculate_hash(algorithm: &Algorithm, data: &[u8]) -> String
             format!("{:x}", result)
         },
         Algorithm::Bcrypt       =>     {
-            let hasher = match hash(data, DEFAULT_COST) {
-                Ok(h)       =>      h,
-                Err(_)              =>      {
-                    eprintln!("error.");
-                    return String::new();
+            let hasher = if Some(s) == salt {
+                match hash_with_salt(data, DEFAULT_COST, s) {
+                    Ok(h)       =>      h,
+                    Err(_)                =>      {
+                        eprintln!("Error while hashing with salt.");
+                        String::new()
+                    }
+                }
+            } else {
+                match hash(data, DEFAULT_COST) {
+                    Ok(h)          =>      h,
+                    Err(_)                =>      {
+                        eprintln!("Error while hashing without salt.");
+                        String::new()
+                    }
                 }
             };
             hasher
