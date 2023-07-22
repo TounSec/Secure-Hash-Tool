@@ -23,7 +23,7 @@ pub fn calculate_hash(algorithm: &Algorithm, data: &[u8], salt: [u8; 16]) -> Str
         },
         Algorithm::Md5       =>     {
             let hasher = if !salt.is_empty() {
-                let salted_hash = format!("{}{}", s, String::from_utf8_lossy(data));
+                let salted_hash = format!("{:?}{}", salt, String::from_utf8_lossy(data));
                 let result = md5::compute(salted_hash.as_bytes());
                 format!("{:x}", result)
 

@@ -37,7 +37,7 @@ pub struct Opt {
     pub salt: [u8; 16],
 
     #[structopt(name = "TEXT", help = "The text to hash")]
-    pub text: String,
+   pub text: String,
 
 }
 
