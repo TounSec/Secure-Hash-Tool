@@ -28,7 +28,13 @@ pub struct Opt {
         )",
         )]
     pub algorithm: Algorithm,
-    
+
+
+    #[structopt(
+    short = "s",
+    long = "salt",
+    help = "The salt value")]
+    pub Salt: Option<String>,
 
     #[structopt(name = "TEXT", help = "The text to hash")]
     pub text: String,

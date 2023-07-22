@@ -25,6 +25,8 @@ pub enum Algorithm {
     Sha512_256,
     #[structopt(name = "bcrypt")]
     Bcrypt,
+    #[structopt(name = "salt")]
+    Salt,
     #[structopt(name = "help")]
     Help,
 }
