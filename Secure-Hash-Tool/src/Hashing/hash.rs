@@ -6,7 +6,7 @@ use sha2::{Sha256, Sha512, Sha512_224, Sha512_256, Sha224, Sha384, Digest};
 use bcrypt::{DEFAULT_COST, hash, hash_with_salt};
 use crate::Hashing::algorithms::Algorithm;
 
-pub fn calculate_hash(algorithm: &Algorithm, data: &[u8], salt: Option<&str>) -> String
+pub fn calculate_hash(algorithm: &Algorithm, data: &[u8], salt: [u8; 16]) -> String
 {
     match algorithm {
         Algorithm::Md2       =>     {
@@ -22,15 +22,16 @@ pub fn calculate_hash(algorithm: &Algorithm, data: &[u8], salt: Option<&str>) ->
             format!("{:x}", result)
         },
         Algorithm::Md5       =>     {
-            if Some(s) == salt {
+            let hasher = if !salt.is_empty() {
                 let salted_hash = format!("{}{}", s, String::from_utf8_lossy(data));
-                let hasher = md5::compute(salted_hash.as_bytes());
-                format!("{:x}", hasher)
+                let result = md5::compute(salted_hash.as_bytes());
+                format!("{:x}", result)
 
             } else {
-                let hasher = md5::compute(data);
-                format!("{:x}", hasher)
-            }
+                let basique_hash = md5::compute(data);
+                format!("{:x}", basique_hash)
+            };
+            hasher
         },
         Algorithm::Sha1    =>     {
             let mut hasher = Sha1::new();
@@ -75,9 +76,9 @@ pub fn calculate_hash(algorithm: &Algorithm, data: &[u8], salt: Option<&str>) ->
             format!("{:x}", result)
         },
         Algorithm::Bcrypt       =>     {
-            let hasher = if Some(s) == salt {
-                match hash_with_salt(data, DEFAULT_COST, s) {
-                    Ok(h)       =>      h,
+            let hasher = if !salt.is_empty() {
+                match hash_with_salt(data, DEFAULT_COST, salt) {
+                    Ok(h)       =>      h.to_string(),
                     Err(_)                =>      {
                         eprintln!("Error while hashing with salt.");
                         String::new()

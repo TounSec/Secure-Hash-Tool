@@ -34,7 +34,7 @@ pub struct Opt {
     short = "s",
     long = "salt",
     help = "The salt value")]
-    pub salt: Option<String>,
+    pub salt: [u8; 16],
 
     #[structopt(name = "TEXT", help = "The text to hash")]
     pub text: String,
