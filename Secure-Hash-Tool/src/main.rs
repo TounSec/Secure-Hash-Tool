@@ -15,8 +15,7 @@ fn main()
         return;
     }
 
-    let salt = opt.salt;
-    let hash = calculate_hash(&opt.algorithm, opt.text.as_bytes(), salt);
+    let hash = calculate_hash(&opt.algorithm, opt.text.as_bytes(), opt.salt);
 
     println!("The {:?} Hash is : {}", opt.algorithm, hash);
 }
